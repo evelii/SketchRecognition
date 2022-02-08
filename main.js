@@ -19,7 +19,8 @@ $(function() {
     canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width = 10;
     canvas.renderAll();
-    //setup listeners 
+    //setup listeners
+
     canvas.on('mouse:up', function(e) {
         getFrame();
         mousePressed = false
@@ -65,7 +66,8 @@ function recordCoor(event) {
 get the best bounding box by trimming around the drawing
 */
 function getMinBox() {
-    //get coordinates 
+    //get coordinates
+
     var coorX = coords.map(function(p) {
         return p.x
     });
@@ -73,7 +75,8 @@ function getMinBox() {
         return p.y
     });
 
-    //find top left and bottom right corners 
+    //find top left and bottom right corners
+
     var min_coords = {
         x: Math.min.apply(null, coorX),
         y: Math.min.apply(null, coorY)
@@ -83,7 +86,8 @@ function getMinBox() {
         y: Math.max.apply(null, coorY)
     }
 
-    //return as strucut 
+    //return as strucut
+
     return {
         min: min_coords,
         max: max_coords
@@ -97,7 +101,8 @@ function getImageData() {
         //get the minimum bounding box around the drawing 
         const mbb = getMinBox()
 
-        //get image data according to dpi 
+        //get image data according to dpi
+    
         const dpi = window.devicePixelRatio
         const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
                                                       (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
@@ -143,7 +148,7 @@ load the class names
 */
 async function loadDict() {
     if (mode == 'ar')
-        loc = 'model2/class_names_ar.txt'
+        loc = 'model/class_names_ar.txt'
     else
         loc = 'model/class_names.txt'
     
