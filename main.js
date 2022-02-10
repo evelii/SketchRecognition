@@ -105,7 +105,8 @@ function getImageData() {
     
         const dpi = window.devicePixelRatio
         const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
-                                                      (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
+            (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
+        print(imgData);
         return imgData
     }
 
@@ -203,7 +204,7 @@ preprocess the data
 */
 function preprocess(imgData) {
     return tf.tidy(() => {
-        //convert to a tensor 
+        //convert to a tensor
         let tensor = tf.browser.fromPixels(imgData, numChannels = 1)
         
         //resize 
@@ -213,7 +214,7 @@ function preprocess(imgData) {
         const offset = tf.scalar(255.0);
         const normalized = tf.scalar(1.0).sub(resized.div(offset));
 
-        //We add a dimension to get a batch shape 
+        //We add a dimension to get a batch shape
         const batched = normalized.expandDims(0)
         return batched
     })
